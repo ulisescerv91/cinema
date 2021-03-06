@@ -1,37 +1,34 @@
 import React,{useState, useEffect} from 'react';
 import './HomeInterface.scss'
 import axios from '../../utils/axios'
+import Header from './Components/Header/Header';
+import Row from './Components/Row/Row';
+import requests from '../../utils/requests'
 
-const HomeInterface = ( {fetchURL} ) => {
+const HomeInterface = () => {
 
-    const [movies,setMovies] = useState([]);
+    const [genres, setGenres] = useState([])
 
     useEffect( ()=> {
 
-        const fetchData = async () =>{
-            const request = await axios.get(fetchURL)
-            setMovies( request.data.results )
-            console.log(request.data.results)
-            return request;
+        const fetchGenres = async () =>{
+             const genresRequest = await axios.get(requests.fetchGenres)
+             setGenres(genresRequest.data.genres)
         }
-        fetchData();
+        fetchGenres();
         
-
     },[])
 
     return (
-        <div>
-            <ul>
+        <div className='homeInterface'>
+            <Header/>
 
-                {
-                    movies.map( (el,i)=>{
-                        return <li>
-                            <span>{el.name || el.title}</span><br/>
-                            <img src={`https://image.tmdb.org/t/p/original${el.poster_path}`} alt={el.name}/>
-                        </li>
-                    })
-                }
-            </ul>
+            {
+                genres.map( (el,i) => <Row genre={el} key={i}/>)
+            }
+            
+            
+            
         </div>
     );
 }

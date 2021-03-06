@@ -4,14 +4,13 @@ import './App.scss';
 
 import HomeInterface from './Pages/Home/HomeInterface'
 
-import requests from './utils/requests'
 
 function App() {
   return (
     <div className="App">
       <Router>
           <Switch>
-            <Route path="/" exact> <HomeInterface fetchURL={requests.fetchTrending}/> </Route>
+            <Route path="/" exact> <HomeInterface/> </Route>
           </Switch>
         </Router>
     </div>

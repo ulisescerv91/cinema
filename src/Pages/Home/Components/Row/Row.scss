@@ -1,0 +1,21 @@
+.row{
+    ul{
+        display: flex;
+        li{
+            // display: flex;
+            // border:1px solid red;
+            // width: 400px;
+            // height: 100px;
+            img{
+                width: 200px;
+                max-height: 150px;
+                object-fit: contain;//Keep the size proportions
+                transition: transform 450ms;
+            }
+            img:hover{
+                transform: scale(1.09)
+            
+            }
+        }
+    }
+}
