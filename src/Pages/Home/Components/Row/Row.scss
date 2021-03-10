@@ -1,11 +1,14 @@
 .row{
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:  center center;
+    // background-attachment: fixed;
+    overflow: hidden;
+
     ul{
         display: flex;
         li{
-            // display: flex;
-            // border:1px solid red;
-            // width: 400px;
-            // height: 100px;
             img{
                 width: 200px;
                 max-height: 150px;

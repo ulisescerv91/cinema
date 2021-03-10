@@ -10,32 +10,31 @@ const Row = ({ genre}) => {
     const {name} = genre;
 
     const [movies,setMovies] = useState([]);
+    const [bgImg,setBgImg] = useState({});
 
+    
     useEffect( ()=> {
 
         const fetchMovies = async () =>{
             const request = await axios.get(requests.fetchMoviesByGenreID(genre.id))
-            setMovies( request.data.results )
-            console.log(request.data.results )
+            await setMovies( request.data.results )
+            const pathBGimg = request.data.results[0].backdrop_path
+            setBgImg({backgroundImage: `url( ${ requestImg.fetchMovieImg(pathBGimg) } )`})
+
             return request;
         }
         fetchMovies();
-        
-
     },[])
 
     return (
-        <div className='row'>
+        <div className='row' style={bgImg}>
             <h1>{ name }</h1>
             <ul>
-
                 {
-
                     movies.length > 0 &&
                     movies.map( (el,i)=>{
                         return <li key={i}>
                             <span>{el.name || el.title}</span><br/>
-                            {/* <img src={} alt={el.name}/> */}
                             <LazyLoadImage
                             effect='blur'
                                 height="200px"
@@ -44,7 +43,6 @@ const Row = ({ genre}) => {
                                 placeholderSrc={popCorn}
                                  />
                                 {/* src={requestImg.fetchMovieImg(el.backdrop_path)} // use normal <img> attributes as props */}
-
                         </li>
                     })
                 }

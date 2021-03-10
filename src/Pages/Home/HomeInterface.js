@@ -7,21 +7,29 @@ import requests from '../../utils/requests'
 
 const HomeInterface = () => {
 
-    const [genres, setGenres] = useState([])
+    const [genres, setGenres] = useState([]);
+    const [trending, setTrending] = useState([])
+
 
     useEffect( ()=> {
 
-        const fetchGenres = async () =>{
+        const fetchData = async () =>{
+            //Trending            
+            const trendingRequest = await axios.get(requests.fetchTrending)
+            setTrending(trendingRequest.data.results[3])
+
+            // Genres
              const genresRequest = await axios.get(requests.fetchGenres)
-             setGenres(genresRequest.data.genres)
+             setGenres(genresRequest.data.genres)            
+             
         }
-        fetchGenres();
+        fetchData();
         
     },[])
 
     return (
         <div className='homeInterface'>
-            <Header/>
+            <Header movie={trending}/>
 
             {
                 genres.map( (el,i) => <Row genre={el} key={i}/>)
