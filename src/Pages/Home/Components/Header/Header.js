@@ -6,12 +6,13 @@ const Header = ({movie}) => {
     const [bgImg, setBgImg] = useState({})
     
     useEffect( ()=> {
+        // console.log(movie)
         const fetchMovies = async () =>{
             setBgImg({backgroundImage: `url( ${ requestImg.fetchMovieImg(backdrop_path) } )`})
             return true;
         }
         fetchMovies();
-    },[])
+    },[movie])
 
     
     
