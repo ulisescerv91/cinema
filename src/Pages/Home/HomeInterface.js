@@ -13,7 +13,7 @@ const HomeInterface = () => {
     },[])
 
 
-    if( trendingArrayCtx.length === 0 || trendingArrayCtx.length === 0 ){
+    if( trendingArrayCtx.length === 0 || genresArrayCtx.length === 0 ){
        return  <h1>Loading...</h1>
     }
     

@@ -24,6 +24,15 @@ const Row = ({ genre}) => {
         history.push('/movie')
     }
 
+    const saveMovieLikeList = async () =>{
+        const res = await axios.get('/authentication/token/new?api_key=14d344666a5abe82c56c471106d9ecde')
+        const requestToken = res.data.request_token;
+
+
+        const data = await axios({ url: `/authenticate/${requestToken}?redirect_to=https://localhost:3000/`, baseURL: 'https://www.themoviedb.org' })
+        // await fetch(``)
+            
+    }
     
     useEffect( ()=> {
 
@@ -39,7 +48,7 @@ const Row = ({ genre}) => {
     },[])
 
     return (
-        <div className='row' style={bgImg}>
+        <div className='rowComponent' style={bgImg}>
             <h1>{ name }</h1>
             <ul>
                 {
@@ -47,6 +56,7 @@ const Row = ({ genre}) => {
                     movies.map( (el,i)=>{
                         return <li key={i}>
                             <span>{el.name || el.title}</span><br/>
+                            <span className="like" onClick={saveMovieLikeList}>LIKE</span>
                             <LazyLoadImage
                             effect='blur'
                                 height="200px"
