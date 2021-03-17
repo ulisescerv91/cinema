@@ -20,7 +20,7 @@ const HomeInterface = () => {
 
     return (        
         <div className='homeInterface'>
-            <Header movie={ trendingArrayCtx[3] } />        
+            <Header  />        
             {
                 genresArrayCtx.map( (el,i) => <Row genre={el} key={i}/>)
             }
