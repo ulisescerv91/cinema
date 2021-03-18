@@ -1,4 +1,5 @@
 .header{
+    position: relative;
     height: 75vh;
     background-size: cover;
     background-repeat: no-repeat;
@@ -11,9 +12,26 @@
     align-items: center;
     &__title{
         text-align: center;
+        z-index: 1;
+
     }
     &__options-container{
         margin-bottom: 20px;
+        z-index: 1;
+    }
+
+    &__gradient{
+        height:30vh;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background:linear-gradient(
+            180deg,
+            transparent,
+            rgba( 37,37,37,0.61),
+            #111
+        );
     }
     
 }

@@ -6,7 +6,7 @@ import axios from '../../axios'
 // useReducer -> alternativa a useState - 
 import DataContext from './DataContext'
 import DataReducer from './DataReducer';
-import requests from '../../requests'
+import requests,{fetchTrendingMovies} from '../../requests'
 
 const DataState = (props) => {
 
@@ -30,32 +30,35 @@ const DataState = (props) => {
     /**
      * * Get array with all name of genres movies
      */
-    const getGenres = async () => {
-        try {
-            const res = await axios.get(requests.fetchGenres).catch(error => console.log(error))
-            const data = res.data.genres;
-            dispatch({
-                type: 'GET_GENRES',
-                payload: data? data : []
-            })
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    // const getGenres = async () => {
+    //     try {
+    //         const res = await axios.get(requests.fetchGenres).catch(error => console.log(error))
+    //         const data = res.data.genres;
+    //         dispatch({
+    //             type: 'GET_GENRES',
+    //             payload: data? data : []
+    //         })
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
 
 
     /**
      * * Get Array with data of trendig movies
      */
-    const getTrendingMovies = async () => {
+    const getTrendingMovie = async () => {
         try {
 
-            const res = await axios.get(requests.fetchTrending).catch(error => console.log(error))
-            const data = res.data.results;
+            
+            const data = await fetchTrendingMovies();
+    // const movie = trendingArrayCtx[ Math.floor(Math.random() * trendingArrayCtx.length)  ]
+           let movie = data[ Math.floor(Math.random() * data.length) ]
             dispatch({
                 type: 'GET_TRENDING_MOVIES',
-                payload: data? data : []
+                payload: movie? movie : []
             })
+            return movie;
         } catch (error) {
             console.log(error)
         }
@@ -78,10 +81,9 @@ const DataState = (props) => {
          */
         <DataContext.Provider value={{
             genresArrayCtx: state.genres,
-            trendingArrayCtx: state.trending,
+            trendingRandomMovieCtx: state.trending,
             selectedMovie: state.selectedMovie,
-            getGenres,
-            getTrendingMovies,
+            getTrendingMovie,
             setSelectedMovie
         }}>
             {

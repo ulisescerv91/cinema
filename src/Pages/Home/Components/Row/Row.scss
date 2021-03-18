@@ -1,25 +1,32 @@
 .rowComponent{
-    overflow: hidden;
     padding:  0 1em;
     margin-top: 1em;
+    overflow-x: scroll;
+    
     &__title{
         font-size:  21px;
         font-weight: bold;
     }
     ul{
         display: flex;
+        overflow-x: scroll;
+        width: 100%;
+        &::-webkit-scrollbar{
+            display: none;
+        }
         li{
+            list-style-type: none;
             position: relative;
             margin-right: 1em;
             img{
                 object-fit: contain;//Keep the size proportions
-                transition: transform 450ms;
+                // transition: transform 450ms;
                 border-radius:7px ;
             }
-            img:hover{
-                transform: scale(1.09)
+            // img:hover{
+            //     transform: scale(1.09)
             
-            }
+            // }
         }
     }
 }
